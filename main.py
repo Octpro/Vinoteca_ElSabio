@@ -146,61 +146,75 @@ def gestionar_bodegas(conexion):
             loc = input("Ingrese la localidad de la bodega: ")
             tel = input("Ingrese el teléfono de la bodega: ")
 
-            conectar_db().execute("INSERT INTO Bodegas (nombre, direccion, localidad, telefono) VALUES (?, ?, ?, ?)", (nom, dir, loc, tel))
-            print("Bodega agregada exitosamente.")
+            conexion.execute("INSERT INTO Bodegas (nombre, direccion, localidad, telefono) VALUES (?, ?, ?, ?)", (nom, dir, loc, tel))
+            conexion.commit()
+            print("\nBodega agregada exitosamente.\n")            
 
         elif opcion == '2':
 
-            fetch_bodegas = conectar_db().execute("SELECT * FROM Bodegas").fetchall()
+            fetch_bodegas = conexion.execute("SELECT * FROM Bodegas").fetchall()
             
             while True:
                 print("\n--- Lista de Bodegas ---")
                 print("Listar por localidad (L), por nombre (N), todas(T)?")
 
-                criterio = input("Seleccione un criterio de ordenamiento (L/N/T): ").upper()
+                criterio = input("Seleccione un criterio de ordenamiento (L/N/T/0 Salir): ").upper()
 
-                if criterio == 'L':
-
-                    fetch_bodegas = conectar_db().execute("SELECT * FROM Bodegas WHERE localidad = ?", (input("Ingrese la localidad: "),)).fetchall()
-                    print(f"\n--- Bodegas en la localidad seleccionada: {fetch_bodegas[0][3] if fetch_bodegas else 'No se encontraron bodegas en esa localidad'}---")
-                    print(f"Nombre: {bodega[1]}, Dirección: {bodega[2]} Teléfono: {bodega[4]}")
-                    break
-
+                if criterio== 'L':
+                    busqueda = input("Ingrese la localidad: ")
+                    fetch_bodegas = conexion.execute("SELECT * FROM Bodegas WHERE localidad = ?", (busqueda,)).fetchall()
+                    titulo = f"\n--- Bodegas en la localidad seleccionada: {busqueda} ---"
+                        
                 elif criterio == 'N':
-                    
-                    fetch_bodegas = conectar_db().execute("SELECT * FROM Bodegas WHERE nombre = ?", (input("Ingrese el nombre de la bodega: "),)).fetchall()
-                    print(f"\n--- Bodegas con el nombre seleccionado: {fetch_bodegas[0][1] if fetch_bodegas else 'No se encontraron bodegas con ese nombre'}---")
-                    print(f"Localidad: {bodega[3]}, Dirección: {bodega[2]} Teléfono: {bodega[4]}")
-                    break
+                    busqueda = input("Ingrese el nombre de la bodega: ")
+                    fetch_bodegas = conexion.execute("SELECT * FROM Bodegas WHERE nombre = ?", (busqueda,)).fetchall()
+                    titulo = f"\n--- Bodegas con el nombre seleccionado: {busqueda} ---"
 
                 elif criterio == 'T':
+                    fetch_bodegas = conexion.execute("SELECT * FROM Bodegas").fetchall()
+                    titulo = f"\n--- Listado de todas las bodegas {len(fetch_bodegas)} --- "
+            
+                elif criterio == '0':
+                    break
 
-                    for bodega in fetch_bodegas:
-                        print(f"ID: {bodega[0]}, Nombre: {bodega[1]}, Dirección: {bodega[2]}, Localidad: {bodega[3]}, Teléfono: {bodega[4]}")
-                
-                        if bodega != fetch_bodegas[-1]:
-                            input("Presione Enter para continuar...")
-                            print("\n--- Siguiente Bodega ---")
+                if criterio in ["L", "N", "T"]:
+                    if fetch_bodegas:
+                        print(titulo)
 
+                        for i, bodega in enumerate(fetch_bodegas):                      
+                            if criterio == 'L':
+                                print(f"Nombre: {bodega[1]}\nDirección: {bodega[2]}\nTeléfono: {bodega[4]}")
+                            elif criterio == 'N':
+                                print(f"Localidad: {bodega[3]}\nDirección: {bodega[2]}\nTeléfono: {bodega[4]}")
+                            elif criterio == 'T':
+                                print(f"Nombre: {bodega[1]}\nDirección: {bodega[2]}\nLocalidad: {bodega[3]}\nTeléfono: {bodega[4]}")    
+                            
+                            if i < len(fetch_bodegas) - 1:
+                                input("Presione Enter para continuar...")
+                                print("\n--- Siguiente Bodega ---")
+                            else:
+                                input("Presione Enter para finalizar la vista...") 
+                    else:
+                        print("No se encontraron resultados para su búsqueda.")
 
         elif opcion == '3':
             
-            buscar_id = input("Ingrese el ID de la bodega que desea modificar: ")
+            nombre = input("Ingrese el nombre de la bodega que desea modificar: ")
 
-            bodega = conectar_db().execute("SELECT * FROM Bodegas WHERE id_bodega = ?", (buscar_id,)).fetchone()
+            bodega = conexion.execute("SELECT * FROM Bodegas WHERE nombre = ?", (nombre,)).fetchone()
 
             if bodega:
-                print(f"ID: {bodega[0]}, Nombre: {bodega[1]}, Dirección: {bodega[2]}, Localidad: {bodega[3]}, Teléfono: {bodega[4]}")
+                print(f"Nombre: {bodega[1]}, Dirección: {bodega[2]}, Localidad: {bodega[3]}, Teléfono: {bodega[4]}")
                 print("\nIngrese los nuevos detalles de la bodega (deje en blanco para mantener el valor actual):")
                 nom = input(f"Nombre [{bodega[1]}]: ") or bodega[1]
                 dir = input(f"Dirección [{bodega[2]}]: ") or bodega[2]
                 loc = input(f"Localidad [{bodega[3]}]: ") or bodega[3]
                 tel = input(f"Teléfono [{bodega[4]}]: ") or bodega[4]
 
-                conectar_db().execute("UPDATE Bodegas SET nombre = ?, direccion = ?, localidad = ?, telefono = ? WHERE id_bodega = ?", (nom, dir, loc, tel, buscar_id))
+                conexion.execute("UPDATE Bodegas SET nombre = ?, direccion = ?, localidad = ?, telefono = ? WHERE nombre = ?", (nom, dir, loc, tel, nombre))
                 print("Bodega modificada exitosamente.")
             else:
-                print("No se encontró una bodega con ese ID.")
+                print("No se encontró una bodega con ese nombre.")
 
         elif opcion == '0':
             break
@@ -218,12 +232,51 @@ def gestionar_proveedores(conexion):
         opcion = input("Seleccione una opción: ")
         
         if opcion == '1':
-            print("Funcionalidad de agregar proveedor (pendiente de implementación).")
-            # Aquí se implementaría la función para agregar un proveedor
+            print("\nIngresa los detalles del nuevo proveedor:")
+            razon_social= input("Ingrese la razon social: ")
+            cuit= input("Ingrese el CUIT del proveedor: ")
+            email = input("Ingrese el email del proveedor: ")
+            tel = input("Ingrese el teléfono del proveedor: ")
+            dir = input("Ingrese la dirección del proveedor: ")
+            nom_contacto = input("Ingrese el nombre del contacto del proveedor: ")
+            
+            conexion.execute("INSERT INTO Proveedores(razon_social, cuit, email, telefono, direccion, contacto_nombre) VALUES (?,?,?,?,?,?)", (razon_social, cuit, email, tel, dir, nom_contacto))
+            conexion.commit()
+            print("\nProveedor agregado exitosamente.\n")
+
         elif opcion == '2':
-            print("Funcionalidad de listar proveedores (pendiente de implementación).")
-            # Aquí se implementaría la función para listar los proveedores
-        elif opcion == '3':
+                print("\n--- Lista de proveedores ---")
+                print("Listado por Razon social")
+
+                buscar_razon_social = input("Ingrese la razon social del proveedor: ")
+                fetch_proveedor = conexion.execute("SELECT * FROM PROVEEDORES WHERE razon_social = ?", (buscar_razon_social,)).fetchone()
+
+                if fetch_proveedor:                
+                    print(f"Razon social: {fetch_proveedor[1]}, CUIT: {fetch_proveedor[2]} Email: {fetch_proveedor[3]}, Telefono: {fetch_proveedor[4]}, Direccion: {fetch_proveedor[5]}, nombre contacto: {fetch_proveedor[6]}")
+                    break
+                else:
+                    print("No se encontró un proveedor con esa razon social.")
+
+        elif opcion =='3':
+            buscar_razon_social = input("Ingrese la razon social del proveedor: ")
+            proveedor = conexion.execute("SELECT * FROM PROVEEDORES WHERE razon_social = ?", (buscar_razon_social,)).fetchone()
+            if proveedor:
+                    print(f"Nombre: {proveedor[1]}, Dirección: {proveedor[2]}, Localidad: {proveedor[3]}, Teléfono: {proveedor[4]}")
+                    print("\nIngrese los nuevos detalles del proveedor (deje en blanco para mantener el valor actual):")
+                    Telefono = input(f"Telefono [{proveedor[3]}]: ") or proveedor[1]
+                    Email = input(f"Email [{proveedor[4]}]: ") or proveedor[2]
+                    Direccion = input(f"Direccion [{proveedor[5]}]: ") or proveedor[3]
+                    Contacto_nombre = input(f"Contaco_nombre [{proveedor[6]}]: ") or proveedor[4]
+                    
+                    conexion.execute("UPDATE PROVEEDORES SET Telefono = ?, Email = ?, Direccion = ?, Contacto_nombre = ? WHERE razon_social = ?", (Telefono, Email, Direccion, Contacto_nombre, proveedor[1]))
+                    print("proveedor modificado exitosamente.")
+            else:
+                    print("No se encontró un proveedor con ese ID.")
+
+            break
+
+           
+        elif opcion == '0':
             break
         else:
             print("Opción no válida, por favor intente nuevamente.")
@@ -239,12 +292,74 @@ def gestionar_vinos(conexion):
         opcion = input("Seleccione una opción: ")
         
         if opcion == '1':
-            print("Funcionalidad de agregar vino (pendiente de implementación).")
-            # Aquí se implementaría la función para agregar un vino
+            print("\nIngresa los detalles del vino nuevo:")
+            cepa = input("Ingrese la cepa del vino: ")
+            anejo = int(input("Ingrese el año de elaboración: "))
+            reserva = int(input("Ingrese la localidad de la bodega (1:Si, 0:No): "))
+            procedencia = input("Ingrese el teléfono de la bodega: ")
+            destino = input("Ingrese el nombre de la bodega: ")
+            lugar_envasado = input("Ingrese la dirección de la bodega: ")
+            precio = float(input("Ingrese la localidad de la bodega: "))
+            stock = int(input("Ingrese el teléfono de la bodega: "))
+
+            conexion.execute("INSERT INTO Vinos (cepa, anejo, reserva, procedencia, destino, lugar_envasado, precio, stock) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", (cepa, anejo, reserva, procedencia, destino, lugar_envasado, precio, stock))
+            conexion.commit()
+            print("\nVino agregado exitosamente.\n")
+
         elif opcion == '2':
-            print("Funcionalidad de listar vinos (pendiente de implementación).")
-            # Aquí se implementaría la función para listar los vinos
+
+            fetch_vinos = conectar_db().execute("SELECT * FROM VINOS").fetchall()
+            
+            while True:
+                print("\n--- Lista de Vinos ---")
+                print("Listar por localidad (L), por nombre (N), todas(T)?")
+
+                criterio = input("Seleccione un criterio de ordenamiento (L/N/T): ").upper()
+
+                if criterio == 'L':
+
+                    fetch_vinos = conectar_db().execute("SELECT * FROM VINOS WHERE lugar_envasado = ?", (input("Ingrese el lugar de envasado: "),)).fetchall()
+                    print(f"\n--- Vinos con el lugar de envasado seleccionado: {fetch_vinos[0][8] if fetch_vinos else 'No se encontraron vinos con ese lugar de envasado'}---")
+                    print(f"Cepa: {vino[3]}, Año: {vino[4]} reserva: {vino[5]}, Procedencia: {vino[6]}, Destino: {vino[7]}, Precio: {vino[9]}, Stock: {vino[10]}")
+                    break
+
+                elif criterio == 'N':
+                    
+                    fetch_vinos = conectar_db().execute("SELECT * FROM VINOS WHERE precio = ?", (float(input("Ingrese el precio del vino: ")),)).fetchall()
+                    print(f"\n--- Vinos con el precio seleccionado: {fetch_vinos[0][10] if fetch_vinos else 'No se encontraron vinos con ese precio'}---")
+                    print(f"Cepa: {vino[3]}, Año: {vino[4]} reserva: {vino[5]}, Procedencia: {vino[6]}, Destino: {vino[7]}, Precio: {vino[9]}, Stock: {vino[10]}")
+
+                    break
+
+                elif criterio == 'T':
+
+                    for vino in fetch_vinos:
+                        print(f"Cepa: {vino[0]}, Año: {vino[1]}, Procedencia: {vino[5]}, Destino: {vino[6]}, Precio: {vino[8]}, Stock: {vino[9]}")
+
+                        if vino != fetch_vinos[-1]:
+                            input("Presione Enter para continuar...")
+                            print("\n--- Siguiente Bodega ---")
+
         elif opcion == '3':
+            
+            buscar_id = input("Ingrese el ID de la bodega que desea modificar: ")
+
+            bodega = conectar_db().execute("SELECT * FROM Bodegas WHERE id_bodega = ?", (buscar_id,)).fetchone()
+
+            if bodega:
+                print(f"Nombre: {bodega[1]}, Dirección: {bodega[2]}, Localidad: {bodega[3]}, Teléfono: {bodega[4]}")
+                print("\nIngrese los nuevos detalles de la bodega (deje en blanco para mantener el valor actual):")
+                nom = input(f"Nombre [{bodega[1]}]: ") or bodega[1]
+                dir = input(f"Dirección [{bodega[2]}]: ") or bodega[2]
+                loc = input(f"Localidad [{bodega[3]}]: ") or bodega[3]
+                tel = input(f"Teléfono [{bodega[4]}]: ") or bodega[4]
+                
+                conectar_db().execute("UPDATE Bodegas SET nombre = ?, direccion = ?, localidad = ?, telefono = ? WHERE id_bodega = ?", (nom, dir, loc, tel, buscar_id))
+                print("Bodega modificada exitosamente.")
+            else:
+                print("No se encontró una bodega con ese ID.")
+
+        elif opcion == '0':
             break
         else:
             print("Opción no válida, por favor intente nuevamente.")
@@ -292,7 +407,6 @@ def main():
     if conexion:
         crear_tablas(conexion)
         print("Base de datos y tablas creadas exitosamente.")
-        conexion.close()
     else:
         print("No se pudo establecer conexión con la base de datos.")
     
@@ -308,25 +422,22 @@ def main():
         opcion = input("Seleccione una opción: ")
         
         if opcion == '1':
-            print("Funcionalidad de gestión de bodegas (pendiente de implementación).")
             gestionar_bodegas(conexion)
         elif opcion == '2':
-            print("Funcionalidad de gestión de proveedores (pendiente de implementación).")
             gestionar_proveedores(conexion)
         elif opcion == '3':
-            print("Funcionalidad de gestión de vinos (pendiente de implementación).")
             gestionar_vinos(conexion)
         elif opcion == '4':
-            print("Funcionalidad de gestión de clientes (pendiente de implementación).")
             gestionar_clientes(conexion)
         elif opcion == '5':
-            print("Funcionalidad de realización de ventas (pendiente de implementación).")
             realizar_venta(conexion)
         elif opcion == '0':
             print("Saliendo del programa.")
             break
         else:
             print("Opción no válida, por favor intente nuevamente.")
+            
+            
 
 if __name__ == "__main__":
     main()
