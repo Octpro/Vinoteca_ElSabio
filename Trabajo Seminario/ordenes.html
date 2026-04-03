@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Órdenes de Venta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-ordenes">
+
+    <nav>
+        <h1>Sección De Ordenes De Venta</h1>
+        <a href="index.html">🏠 Menu Principal</a>
+        <a href="vinos.html">🍷 Vinos</a>
+        <a href="bodegas.html">🏭 Bodegas</a>
+        <a href="proveedores.html">🚚 Proveedores</a>
+        <a href="clientes.html">👥 Clientes</a>
+        <a href="ordenes.html" class="active">🛒 Órdenes (Ventas)</a>
+    </nav>
+
+    <main>
+        <header>
+            <div>
+                <h2>Órdenes de Venta</h2>
+                <p class="subtitle">Historial de pedidos, seguimiento de envíos y facturación.</p>
+            </div>
+            <button class="btn-add">+ Nueva Orden</button>
+        </header>
+
+        <div style="margin-bottom: 20px; display: flex; gap: 10px;">
+            <button style="padding: 8px 16px; border-radius: 20px; border: 1px solid var(--primary); background: var(--primary); color: white; cursor: pointer;">Todas</button>
+            <button style="padding: 8px 16px; border-radius: 20px; border: 1px solid #ccc; background: white; cursor: pointer;">Pendientes</button>
+            <button style="padding: 8px 16px; border-radius: 20px; border: 1px solid #ccc; background: white; cursor: pointer;">Completadas</button>
+        </div>
+
+        <div class="wine-grid">
+            <div class="wine-card" style="border-top: 4px solid #f59e0b;">
+                <div class="wine-body">
+                    <span class="badge" style="background: #f3f4f8; color: var(--text-muted); border: 1px solid #d1d5db;">#ORD-1045</span>
+                    <h3>Restaurante El Gourmet</h3>
+                    <div class="wine-details">
+                        <strong>Fecha:</strong> 03 de Abril, 2026<br>
+                        <strong>Artículos:</strong> 24 botellas (Malbec, Chardonnay)<br>
+                        <strong>Total:</strong> $315,000<br>
+                        <strong>Método de pago:</strong> Transferencia
+                    </div>
+                    <div class="wine-footer">
+                        <span class="stock-pill" style="background: #fef3c7; color: #b45309; border-color: #fde68a;">Procesando</span>
+                        <a href="#" class="btn-view">Ver Factura →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wine-card" style="border-top: 4px solid #10b981;">
+                <div class="wine-body">
+                    <span class="badge" style="background: #f3f4f8; color: var(--text-muted); border: 1px solid #d1d5db;">#ORD-1044</span>
+                    <h3>Hotel Central</h3>
+                    <div class="wine-details">
+                        <strong>Fecha:</strong> 01 de Abril, 2026<br>
+                        <strong>Artículos:</strong> 60 botellas (Surtido)<br>
+                        <strong>Total:</strong> $890,000<br>
+                        <strong>Método de pago:</strong> Tarjeta de Crédito
+                    </div>
+                    <div class="wine-footer">
+                        <span class="stock-pill" style="background: #d1fae5; color: #065f46; border-color: #a7f3d0;">Entregado</span>
+                        <a href="#" class="btn-view">Ver Factura →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wine-card" style="border-top: 4px solid #3b82f6;">
+                <div class="wine-body">
+                    <span class="badge" style="background: #f3f4f8; color: var(--text-muted); border: 1px solid #d1d5db;">#ORD-1043</span>
+                    <h3>Vinoteca Sur</h3>
+                    <div class="wine-details">
+                        <strong>Fecha:</strong> 30 de Marzo, 2026<br>
+                        <strong>Artículos:</strong> 12 botellas (Espumoso)<br>
+                        <strong>Total:</strong> $222,000<br>
+                        <strong>Método de pago:</strong> Cuenta Corriente
+                    </div>
+                    <div class="wine-footer">
+                        <span class="stock-pill" style="background: #dbeafe; color: #1e40af; border-color: #bfdbfe;">En Camino</span>
+                        <a href="#" class="btn-view">Ver Factura →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wine-card" style="border-top: 4px solid #ef4444;">
+                <div class="wine-body">
+                    <span class="badge" style="background: #f3f4f8; color: var(--text-muted); border: 1px solid #d1d5db;">#ORD-1042</span>
+                    <h3>Eventos Corporativos SA</h3>
+                    <div class="wine-details">
+                        <strong>Fecha:</strong> 25 de Marzo, 2026<br>
+                        <strong>Artículos:</strong> 36 botellas (Cabernet)<br>
+                        <strong>Total:</strong> $450,000<br>
+                        <strong>Método de pago:</strong> Pendiente
+                    </div>
+                    <div class="wine-footer">
+                        <span class="stock-pill" style="background: #fee2e2; color: #991b1b; border-color: #fecaca;">Cancelado</span>
+                        <a href="#" class="btn-view">Ver Detalles →</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>

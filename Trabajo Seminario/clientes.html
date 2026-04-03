@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-clientes">
+
+    <nav>
+        <h1>Sección De Clientes</h1>
+        <a href="index.html">🏠 Menu Principal</a>
+        <a href="vinos.html">🍷 Vinos</a>
+        <a href="bodegas.html">🏭 Bodegas</a>
+        <a href="proveedores.html">🚚 Proveedores</a>
+        <a href="clientes.html" class="active">👥 Clientes</a>
+        <a href="ordenes.html">🛒 Órdenes (Ventas)</a>
+    </nav>
+
+    <main>
+        <header>
+            <div>
+                <h2>Directorio de Clientes</h2>
+                <p class="subtitle">Gestiona tu cartera de clientes mayoristas, minoristas y particulares.</p>
+            </div>
+            <button class="btn-add">+ Añadir Cliente</button>
+        </header>
+
+        <div style="margin-bottom: 20px; display: flex; gap: 10px;">
+            <button style="padding: 8px 16px; border-radius: 20px; border: 1px solid var(--primary); background: var(--primary); color: white; cursor: pointer;">Todos</button>
+            <button style="padding: 8px 16px; border-radius: 20px; border: 1px solid #ccc; background: white; cursor: pointer;">Mayoristas</button>
+            <button style="padding: 8px 16px; border-radius: 20px; border: 1px solid #ccc; background: white; cursor: pointer;">Particulares</button>
+            <button style="padding: 8px 16px; border-radius: 20px; border: 1px solid #ccc; background: white; cursor: pointer;">⭐ VIP</button>
+        </div>
+
+        <div class="wine-grid">
+            <div class="wine-card" style="border-top: 4px solid var(--accent);">
+                <div class="wine-body">
+                    <span class="badge" style="background: #fef9c3; color: #854d0e; border: 1px solid #fef08a;">⭐ VIP Mayorista</span>
+                    <h3>Restaurante El Gourmet</h3>
+                    <div class="wine-details">
+                        <strong>Contacto:</strong> Carlos Méndez<br>
+                        <strong>Email:</strong> compras@elgourmet.com<br>
+                        <strong>Teléfono:</strong> +54 11 4555-1234<br>
+                        <strong>Última compra:</strong> 03/Abr/2026
+                    </div>
+                    <div class="wine-footer">
+                        <span class="stock-pill" style="background: #e0f2fe; color: #0284c7; border-color: #bae6fd;">Activo</span>
+                        <a href="#" class="btn-view">Ver Perfil →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wine-card" style="border-top: 4px solid #3b82f6;">
+                <div class="wine-body">
+                    <span class="badge" style="background: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe;">Mayorista</span>
+                    <h3>Vinoteca Sur</h3>
+                    <div class="wine-details">
+                        <strong>Contacto:</strong> Laura Giménez<br>
+                        <strong>Email:</strong> info@vinotecasur.com.ar<br>
+                        <strong>Teléfono:</strong> +54 261 488-9000<br>
+                        <strong>Última compra:</strong> 30/Mar/2026
+                    </div>
+                    <div class="wine-footer">
+                        <span class="stock-pill" style="background: #e0f2fe; color: #0284c7; border-color: #bae6fd;">Activo</span>
+                        <a href="#" class="btn-view">Ver Perfil →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wine-card" style="border-top: 4px solid #3b82f6;">
+                <div class="wine-body">
+                    <span class="badge" style="background: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe;">Mayorista</span>
+                    <h3>Hotel Central</h3>
+                    <div class="wine-details">
+                        <strong>Contacto:</strong> Depto. de Compras<br>
+                        <strong>Email:</strong> proveedores@hotelcentral.com<br>
+                        <strong>Teléfono:</strong> +54 351 422-5566<br>
+                        <strong>Última compra:</strong> 01/Abr/2026
+                    </div>
+                    <div class="wine-footer">
+                        <span class="stock-pill" style="background: #e0f2fe; color: #0284c7; border-color: #bae6fd;">Activo</span>
+                        <a href="#" class="btn-view">Ver Perfil →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wine-card" style="border-top: 4px solid #10b981;">
+                <div class="wine-body">
+                    <span class="badge" style="background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0;">Particular</span>
+                    <h3>Martín Rossi</h3>
+                    <div class="wine-details">
+                        <strong>Tipo:</strong> Coleccionista<br>
+                        <strong>Email:</strong> mrossi_coleccion@email.com<br>
+                        <strong>Teléfono:</strong> +54 11 3444-9988<br>
+                        <strong>Última compra:</strong> 15/Feb/2026
+                    </div>
+                    <div class="wine-footer">
+                        <span class="stock-pill" style="background: #f3f4f8; color: var(--text-muted); border-color: #d1d5db;">Inactivo (30+ días)</span>
+                        <a href="#" class="btn-view">Ver Perfil →</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>

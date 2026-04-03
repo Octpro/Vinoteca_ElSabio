@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinoteca, Sistema de Gestión</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav>
+        <h1>WineVault</h1>
+        <a href="index.html" class="active">🏠 Menu Principal</a>
+        <a href="vinos.html">🍷 Vinos</a>
+        <a href="bodegas.html">🏭 Bodegas</a>
+        <a href="proveedores.html">🚚 Proveedores</a>
+        <a href="clientes.html">👥 Clientes</a>
+        <a href="ordenes.html">🛒 Órdenes (Ventas)</a>
+    </nav>
+
+    <main>
+        <header>
+            <div>
+                <h2>Nuestra Vinoteca</h2>
+                <p class="subtitle">Resumen general de inventario y ventas.</p>
+            </div>
+            <button class="btn-add">+ Nuevo Registro</button>
+        </header>
+
+        <section class="stats-grid">
+            <div class="stat-card">
+                <h4>Stock Total</h4>
+                <p>1,450</p>
+            </div>
+            <div class="stat-card">
+                <h4>Órdenes Realizadas</h4>
+                <p>342</p>
+            </div>
+            <div class="stat-card">
+                <h4>Clientes Activos</h4>
+                <p>128</p>
+            </div>
+            <div class="stat-card">
+                <h4>Proveedores</h4>
+                <p>15</p>
+            </div>
+        </section>
+
+        <h3 style="font-family: 'Playfair Display', serif; color: var(--primary); margin-bottom: 20px;">Inventario Destacado</h3>
+
+        <div class="wine-grid">
+            <div class="wine-card tipo-tinto">
+                <div class="wine-header">🍷</div>
+                <div class="wine-body">
+                    <span class="badge">Tinto</span>
+                    <h3>Bodega Catena Zapata</h3>
+                    <div class="wine-details">
+                        <strong>Cepa:</strong> Malbec<br>
+                        <strong>Añejo:</strong> 2018<br>
+                        <strong>Procedencia:</strong> Mendoza<br>
+                        <strong>Precio Unitario:</strong> $15,000
+                    </div>
+                    <div class="wine-footer">
+                        <span class="stock-pill">Stock: 45</span>
+                        <a href="#" class="btn-view">Editar →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wine-card tipo-blanco">
+                <div class="wine-header">🥂</div>
+                <div class="wine-body">
+                    <span class="badge">Blanco</span>
+                    <h3>Bodega Luigi Bosca</h3>
+                    <div class="wine-details">
+                        <strong>Cepa:</strong> Chardonnay<br>
+                        <strong>Añejo:</strong> 2022<br>
+                        <strong>Procedencia:</strong> Luján de Cuyo<br>
+                        <strong>Precio Unitario:</strong> $9,500
+                    </div>
+                    <div class="wine-footer">
+                        <span class="stock-pill">Stock: 12</span>
+                        <a href="#" class="btn-view">Editar →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wine-card tipo-tinto">
+                <div class="wine-header">🍷</div>
+                <div class="wine-body">
+                    <span class="badge">Tinto</span>
+                    <h3>Bodega Rutini</h3>
+                    <div class="wine-details">
+                        <strong>Cepa:</strong> Cabernet Sauvignon<br>
+                        <strong>Añejo:</strong> 2016<br>
+                        <strong>Procedencia:</strong> Valle de Uco<br>
+                        <strong>Precio Unitario:</strong> $22,000
+                    </div>
+                    <div class="wine-footer">
+                        <span class="stock-pill" style="background: #fee2e2; color: #991b1b; border-color: #fecaca;">Stock: 3</span>
+                        <a href="#" class="btn-view">Editar →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wine-card tipo-tinto">
+                <div class="wine-header">🍷</div>
+                <div class="wine-body">
+                    <span class="badge">Tinto</span>
+                    <h3>Bodega Salentein</h3>
+                    <div class="wine-details">
+                        <strong>Cepa:</strong> Pinot Noir<br>
+                        <strong>Añejo:</strong> 2021<br>
+                        <strong>Procedencia:</strong> Valle de Uco<br>
+                        <strong>Precio Unitario:</strong> $12,500
+                    </div>
+                    <div class="wine-footer">
+                        <span class="stock-pill">Stock: 24</span>
+                        <a href="#" class="btn-view">Editar →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wine-card tipo-blanco">
+                <div class="wine-header">🥂</div>
+                <div class="wine-body">
+                    <span class="badge">Blanco</span>
+                    <h3>Bodega Norton</h3>
+                    <div class="wine-details">
+                        <strong>Cepa:</strong> Sauvignon Blanc<br>
+                        <strong>Añejo:</strong> 2023<br>
+                        <strong>Procedencia:</strong> Luján de Cuyo<br>
+                        <strong>Precio Unitario:</strong> $8,000
+                    </div>
+                    <div class="wine-footer">
+                        <span class="stock-pill">Stock: 50</span>
+                        <a href="#" class="btn-view">Editar →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wine-card tipo-espumoso">
+                <div class="wine-header">🍾</div>
+                <div class="wine-body">
+                    <span class="badge">Espumoso</span>
+                    <h3>Chandon</h3>
+                    <div class="wine-details">
+                        <strong>Cepa:</strong> Brut Nature<br>
+                        <strong>Añejo:</strong> 2020<br>
+                        <strong>Procedencia:</strong> Mendoza<br>
+                        <strong>Precio Unitario:</strong> $18,500
+                    </div>
+                    <div class="wine-footer">
+                        <span class="stock-pill">Stock: 18</span>
+                        <a href="#" class="btn-view">Editar →</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,352 @@
+
+:root {
+    --primary: #590d16;      
+    --primary-light: #8a1724; 
+    --accent: #d4af37;       
+    --bg: #f3f4f8;           
+    --surface: rgba(255, 255, 255, 0.9);
+    --text-main: #111827;
+    --text-muted: #6b7280;
+    --radius: 16px;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.page-vinos {
+    --primary: #722F37;       
+    --primary-light: #9B3D4A; 
+    --accent: #E8D8A6;        
+    --bg: #fcf8f9;            
+}
+
+
+.page-bodegas {
+    --primary: #5c4033;       
+    --primary-light: #8b5a2b; 
+    --accent: #c19a6b;
+    --bg: #fdfbf7;            
+}
+
+
+.page-proveedores {
+    --primary: #1e3a8a;      
+    --primary-light: #3b82f6; 
+    --accent: #10b981;       
+    --bg: #f0f4f8;           
+}
+
+
+.page-clientes {
+    --primary: #064e3b;      
+    --primary-light: #059669;
+    --accent: #fbbf24;        
+    --bg: #f2fbf5;           
+}
+
+
+.page-ordenes {
+    --primary: #4c1d95;     
+    --primary-light: #7c3aed;
+    --accent: #f472b6;
+    --bg: #f5f3fa;
+}         
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg);
+    background-image: radial-gradient(circle at top right, #fff1f2, transparent 40%);
+    color: var(--text-main);
+    display: flex;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+nav {
+    width: 260px;
+    background: linear-gradient(180deg, #590d16 0%, #2a0408 100%);
+    color: white;
+    padding: 2.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+    z-index: 100;
+}
+
+nav h1 {
+    font-family: 'Playfair Display', serif;
+    color: #d4af37;
+    font-size: 1.8rem;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+nav a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    padding: 1rem 1.2rem;
+    margin-bottom: 0.5rem;
+    border-radius: 12px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+nav a:hover, nav a.active {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+    transform: translateX(8px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* =========================================
+   CONTENIDO PRINCIPAL Y HEADER
+   ========================================= */
+main {
+    margin-left: 260px;
+    padding: 3rem 4rem;
+    width: calc(100% - 260px);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+    animation: fadeUp 0.6s ease-out;
+}
+
+header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--primary);
+}
+
+.subtitle {
+    color: var(--text-muted);
+    margin-top: 8px;
+}
+
+.btn-add {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(89, 13, 22, 0.3);
+}
+
+.btn-add:hover {
+    background: var(--primary-light);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(89, 13, 22, 0.4);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3.5rem;
+}
+
+.stat-card {
+    background: var(--surface);
+    backdrop-filter: blur(10px);
+    padding: 1.8rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255,255,255,0.5);
+    animation: fadeUp 0.6s ease-out both;
+}
+
+.stat-card:nth-child(1) { animation-delay: 0.1s; }
+.stat-card:nth-child(2) { animation-delay: 0.2s; }
+.stat-card:nth-child(3) { animation-delay: 0.3s; }
+.stat-card:nth-child(4) { animation-delay: 0.4s; }
+
+.stat-card h4 {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 0.5rem;
+}
+
+.stat-card p {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary);
+    font-family: 'Playfair Display', serif;
+}
+
+
+.wine-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2.5rem;
+}
+
+.wine-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255,255,255,0.8);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fadeUp 0.6s ease-out both;
+    animation-delay: 0.5s;
+}
+
+.wine-card:hover {
+    transform: translateY(-12px);
+}
+
+.wine-header {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+}
+
+.wine-body {
+    padding: 2rem;
+}
+
+.badge {
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.wine-body h3 {
+    margin: 0 0 0.5rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--primary);
+}
+
+.wine-details {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.wine-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 1.2rem;
+}
+
+.stock-pill {
+    background: #f0fdf4;
+    color: #166534;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid #bbf7d0;
+}
+
+.btn-view {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+}
+
+.btn-view:hover {
+    color: var(--accent);
+}
+
+
+.tipo-tinto .wine-header {
+    background: linear-gradient(135deg, #722F37 0%, #3B0918 100%);
+    color: #FFD1DC;
+}
+.tipo-tinto .badge {
+    background-color: #FDE8E9;
+    color: #900C3F;
+    border: 1px solid #FAD1D4;
+}
+.wine-card.tipo-tinto:hover {
+    border-color: #722F37;
+    box-shadow: 0 15px 30px rgba(114, 47, 55, 0.15);
+}
+
+
+.tipo-blanco .wine-header {
+    background: linear-gradient(135deg, #E8D8A6 0%, #BBA53D 100%);
+    color: #4A3B00; 
+}
+.tipo-blanco .badge {
+    background-color: #FEF9E7;
+    color: #7D6608;
+    border: 1px solid #F9E79F;
+}
+.wine-card.tipo-blanco:hover {
+    border-color: #BBA53D;
+    box-shadow: 0 15px 30px rgba(187, 165, 61, 0.15);
+}
+
+.tipo-espumoso .wine-header {
+    background: linear-gradient(135deg, #1A1C20 0%, #000000 100%);
+    color: #F1C40F;
+    position: relative;
+}
+.tipo-espumoso .wine-header::before {
+    content: '✨';
+    position: absolute;
+    font-size: 1.5rem;
+    top: 15px;
+    right: 15px;
+    opacity: 0.7;
+}
+.tipo-espumoso .badge {
+    background-color: #F4F6F7;
+    color: #273746;
+    border: 1px solid #D5D8DC;
+}
+.wine-card.tipo-espumoso:hover {
+    border-color: #1A1C20;
+    box-shadow: 0 15px 30px rgba(26, 28, 32, 0.2);
+}
+
+
+@media (max-width: 900px) {
+    body { flex-direction: column; }
+    nav {
+        width: 100%; height: auto; position: relative;
+        padding: 1rem; flex-direction: row;
+        justify-content: space-between; align-items: center; flex-wrap: wrap;
+    }
+    nav h1 { margin: 0; }
+    nav a { display: none; }
+    main { margin-left: 0; width: 100%; padding: 1.5rem; }
+    header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+}
