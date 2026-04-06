@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Vinoteca{% endblock %} | WineVault</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="{% block page_class %}{% endblock %}">
+
+    <nav>
+        <h1>WineVault</h1>
+        <a href="{{ url_for('index') }}" {% if request.endpoint == 'index' %}class="active"{% endif %}>🏠 Menu Principal</a>
+        <a href="{{ url_for('vinos') }}" {% if request.endpoint == 'vinos' %}class="active"{% endif %}>🍷 Vinos</a>
+        <a href="{{ url_for('bodegas') }}" {% if request.endpoint == 'bodegas' %}class="active"{% endif %}>🏭 Bodegas</a>
+        <a href="{{ url_for('proveedores') }}" {% if request.endpoint == 'proveedores' %}class="active"{% endif %}>🚚 Proveedores</a>
+        <a href="{{ url_for('clientes') }}" {% if request.endpoint == 'clientes' %}class="active"{% endif %}>👥 Clientes</a>
+        <a href="{{ url_for('ordenes') }}" {% if request.endpoint == 'ordenes' %}class="active"{% endif %}>🛒 Órdenes (Ventas)</a>
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+</body>
+</html>

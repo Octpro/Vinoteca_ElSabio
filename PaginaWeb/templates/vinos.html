@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Vinos{% endblock %}
+{% block page_class %}page-vinos{% endblock %}
+
+{% block content %}
+<header>
+    <div>
+        <h2>Catálogo de Vinos</h2>
+        <p class="subtitle">Gestiona tu inventario, actualiza precios y revisa el stock disponible.</p>
+    </div>
+    <button class="btn-add">+ Añadir Vino</button>
+</header>
+
+<div style="margin-bottom: 20px; display: flex; gap: 10px;">
+    <button style="padding: 8px 16px; border-radius: 20px; border: 1px solid var(--primary); background: var(--primary); color: white; cursor: pointer;">Todos</button>
+    <button style="padding: 8px 16px; border-radius: 20px; border: 1px solid #ccc; background: white; cursor: pointer;">Tintos</button>
+    <button style="padding: 8px 16px; border-radius: 20px; border: 1px solid #ccc; background: white; cursor: pointer;">Blancos</button>
+    <button style="padding: 8px 16px; border-radius: 20px; border: 1px solid #ccc; background: white; cursor: pointer;">Espumosos</button>
+</div>
+
+<div class="wine-grid">
+    {% for vino in vinos %}
+    {% set tipo_clase = 'tipo-tinto' if vino[4] in ['Malbec', 'Cabernet Sauvignon', 'Pinot Noir', 'Syrah', 'Merlot', 'Bonarda'] else ('tipo-blanco' if vino[4] in ['Chardonnay', 'Torrontés', 'Sauvignon Blanc'] else 'tipo-espumoso') %}
+    {% set emoji = '🍷' if vino[4] in ['Malbec', 'Cabernet Sauvignon', 'Pinot Noir', 'Syrah', 'Merlot', 'Bonarda'] else ('🥂' if vino[4] in ['Chardonnay', 'Torrontés', 'Sauvignon Blanc'] else '🍾') %}
+    
+    <div class="wine-card {{ tipo_clase }}">
+        <div class="wine-header">{{ emoji }}</div>
+        <div class="wine-body">
+            <span class="badge">{{ vino[4] }}</span>
+            <h3>{{ vino[3] }}</h3>
+            <div class="wine-details">
+                <strong>Cepa:</strong> {{ vino[4] }}<br>
+                <strong>Añejo:</strong> {{ vino[5] }}<br>
+                <strong>Procedencia:</strong> {{ vino[7] }}<br>
+                <strong>Precio Unitario:</strong> ${{ "{:,.0f}".format(vino[9]) }}
+            </div>
+            <div class="wine-footer">
+                <span class="stock-pill" {% if vino[10] < 10 %}style="background: #fee2e2; color: #991b1b; border-color: #fecaca;"{% endif %}>Stock: {{ vino[10] }}</span>
+                <a href="#" class="btn-view">Editar →</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

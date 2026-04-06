@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Proveedores{% endblock %}
+{% block page_class %}page-proveedores{% endblock %}
+
+{% block content %}
+<header>
+    <div>
+        <h2>Gestión de Proveedores</h2>
+        <p class="subtitle">Directorio de empresas de logística, insumos y servicios de transporte.</p>
+    </div>
+    <button class="btn-add">+ Añadir Proveedor</button>
+</header>
+
+<div class="wine-grid">
+    {% for proveedor in proveedores %}
+    {% set border_color = '#8b5cf6' if loop.index == 1 else '#10b981' if loop.index in [2, 3] else '#f59e0b' %}
+    {% set tipo = 'Logística' if loop.index == 1 else 'Insumos' if loop.index in [2, 3] else 'Servicios' %}
+    <div class="wine-card" style="border-left: 4px solid {{ border_color }};">
+        <div class="wine-body">
+            <span class="badge" style="background: {% if loop.index == 1 %}#ede9fe{% elif loop.index in [2, 3] %}#d1fae5{% else %}#fef3c7{% endif %}; color: {% if loop.index == 1 %}#5b21b6{% elif loop.index in [2, 3] %}#065f46{% else %}#92400e{% endif %}; border: 1px solid {% if loop.index == 1 %}#ddd6fe{% elif loop.index in [2, 3] %}#a7f3d0{% else %}#fde68a{% endif %};">{{ tipo }}</span>
+            <h3>{{ proveedor[1] }}</h3>
+            <div class="wine-details">
+                <strong>Contacto:</strong> {{ proveedor[6] }}<br>
+                <strong>Email:</strong> {{ proveedor[4] }}<br>
+                <strong>Teléfono:</strong> {{ proveedor[3] }}<br>
+                <strong>CUIT:</strong> {{ proveedor[2] }}
+            </div>
+            <div class="wine-footer">
+                <span class="stock-pill" style="background: #e0f2fe; color: #0284c7; border-color: #bae6fd;">Cuenta al día</span>
+                <a href="#" class="btn-view">Ver Detalles →</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,4 +1,3 @@
-
 :root {
     --primary: #590d16;      
     --primary-light: #8a1724; 
@@ -18,14 +17,12 @@
     --bg: #fcf8f9;            
 }
 
-
 .page-bodegas {
     --primary: #5c4033;       
     --primary-light: #8b5a2b; 
     --accent: #c19a6b;
     --bg: #fdfbf7;            
 }
-
 
 .page-proveedores {
     --primary: #1e3a8a;      
@@ -34,14 +31,12 @@
     --bg: #f0f4f8;           
 }
 
-
 .page-clientes {
     --primary: #064e3b;      
     --primary-light: #059669;
     --accent: #fbbf24;        
     --bg: #f2fbf5;           
 }
-
 
 .page-ordenes {
     --primary: #4c1d95;     
@@ -71,8 +66,6 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-
-
 nav {
     width: 260px;
     background: linear-gradient(180deg, #590d16 0%, #2a0408 100%);
@@ -92,6 +85,7 @@ nav h1 {
     margin-bottom: 3rem;
     text-align: center;
 }
+
 nav a {
     color: rgba(255,255,255,0.6);
     text-decoration: none;
@@ -112,9 +106,6 @@ nav a:hover, nav a.active {
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-/* =========================================
-   CONTENIDO PRINCIPAL Y HEADER
-   ========================================= */
 main {
     margin-left: 260px;
     padding: 3rem 4rem;
@@ -195,7 +186,6 @@ header h2 {
     font-family: 'Playfair Display', serif;
 }
 
-
 .wine-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -210,7 +200,6 @@ header h2 {
     border: 1px solid rgba(255,255,255,0.8);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     animation: fadeUp 0.6s ease-out both;
-    animation-delay: 0.5s;
 }
 
 .wine-card:hover {
@@ -284,31 +273,33 @@ header h2 {
     color: var(--accent);
 }
 
-
 .tipo-tinto .wine-header {
     background: linear-gradient(135deg, #722F37 0%, #3B0918 100%);
     color: #FFD1DC;
 }
+
 .tipo-tinto .badge {
     background-color: #FDE8E9;
     color: #900C3F;
     border: 1px solid #FAD1D4;
 }
+
 .wine-card.tipo-tinto:hover {
     border-color: #722F37;
     box-shadow: 0 15px 30px rgba(114, 47, 55, 0.15);
 }
 
-
 .tipo-blanco .wine-header {
     background: linear-gradient(135deg, #E8D8A6 0%, #BBA53D 100%);
     color: #4A3B00; 
 }
+
 .tipo-blanco .badge {
     background-color: #FEF9E7;
     color: #7D6608;
     border: 1px solid #F9E79F;
 }
+
 .wine-card.tipo-blanco:hover {
     border-color: #BBA53D;
     box-shadow: 0 15px 30px rgba(187, 165, 61, 0.15);
@@ -317,26 +308,18 @@ header h2 {
 .tipo-espumoso .wine-header {
     background: linear-gradient(135deg, #1A1C20 0%, #000000 100%);
     color: #F1C40F;
-    position: relative;
 }
-.tipo-espumoso .wine-header::before {
-    content: '✨';
-    position: absolute;
-    font-size: 1.5rem;
-    top: 15px;
-    right: 15px;
-    opacity: 0.7;
-}
+
 .tipo-espumoso .badge {
     background-color: #F4F6F7;
     color: #273746;
     border: 1px solid #D5D8DC;
 }
+
 .wine-card.tipo-espumoso:hover {
     border-color: #1A1C20;
     box-shadow: 0 15px 30px rgba(26, 28, 32, 0.2);
 }
-
 
 @media (max-width: 900px) {
     body { flex-direction: column; }

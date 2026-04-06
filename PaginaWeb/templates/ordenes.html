@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Órdenes{% endblock %}
+{% block page_class %}page-ordenes{% endblock %}
+
+{% block content %}
+<header>
+    <div>
+        <h2>Órdenes de Venta</h2>
+        <p class="subtitle">Historial de pedidos, seguimiento de envíos y facturación.</p>
+    </div>
+    <button class="btn-add">+ Nueva Orden</button>
+</header>
+
+<div style="margin-bottom: 20px; display: flex; gap: 10px;">
+    <button style="padding: 8px 16px; border-radius: 20px; border: 1px solid var(--primary); background: var(--primary); color: white; cursor: pointer;">Todas</button>
+    <button style="padding: 8px 16px; border-radius: 20px; border: 1px solid #ccc; background: white; cursor: pointer;">Pendientes</button>
+    <button style="padding: 8px 16px; border-radius: 20px; border: 1px solid #ccc; background: white; cursor: pointer;">Completadas</button>
+</div>
+
+<div class="wine-grid">
+    {% for orden in ordenes %}
+    {% set border_color = '#f59e0b' if loop.index == 1 else '#10b981' if loop.index == 2 else '#3b82f6' if loop.index == 3 else '#ef4444' %}
+    {% set estado = 'Procesando' if loop.index == 1 else 'Entregado' if loop.index == 2 else 'En Camino' if loop.index == 3 else 'Cancelado' %}
+    {% set estado_bg = '#fef3c7' if loop.index == 1 else '#d1fae5' if loop.index == 2 else '#dbeafe' if loop.index == 3 else '#fee2e2' %}
+    {% set estado_color = '#b45309' if loop.index == 1 else '#065f46' if loop.index == 2 else '#1e40af' if loop.index == 3 else '#991b1b' %}
+    
+    <div class="wine-card" style="border-top: 4px solid {{ border_color }};">
+        <div class="wine-body">
+            <span class="badge" style="background: #f3f4f8; color: var(--text-muted); border: 1px solid #d1d5db;">#ORD-{{ 1045 - loop.index0 }}</span>
+            <h3>Cliente {{ orden[1] }}</h3>
+            <div class="wine-details">
+                <strong>Fecha:</strong> {{ orden[2] }}<br>
+                <strong>Total:</strong> ${{ "{:,.0f}".format(orden[3]) }}<br>
+                <strong>ID Cliente:</strong> {{ orden[1] }}
+            </div>
+            <div class="wine-footer">
+                <span class="stock-pill" style="background: {{ estado_bg }}; color: {{ estado_color }}; border-color: {{ estado_bg }};">{{ estado }}</span>
+                <a href="#" class="btn-view">Ver Detalles →</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

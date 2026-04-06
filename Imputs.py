@@ -49,11 +49,15 @@ for _ in range(100):
                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''', 
                    (id_bodega, id_proveedor, nombre, cepa, anejo, reserva, procedencia, lugar_envasado, precio, stock))
 
-# --- 4. GENERAR 100 CLIENTES ---
-nombres_cli = ['Juan', 'María', 'Pedro', 'Ana', 'Luis', 'Laura', 'Carlos', 'Sofía', 'Diego', 'Martina', 'Franco', 'Florencia']
-apellidos_cli = ['García', 'López', 'Pérez', 'González', 'Rodríguez', 'Fernández', 'Martínez', 'Gómez', 'Díaz', 'Álvarez', 'Romero']
+cursor.execute('''INSERT INTO Clientes (nombre, apellido, dni, fecha_nac, email, preferencia, telefono, direccion) 
+                  VALUES (?, ?, ?, ?, ?, ?, ?, ?)''', 
+               ("Consumidor", "Final", "0", "1900-01-01", "N/A", "N/A", "N/A", "Mostrador"))
 
-for _ in range(100):
+# --- 4. GENERAR 100 CLIENTES ---
+nombres_cli = ['Juan', 'Maria', 'Pedro', 'Ana', 'Luis', 'Laura', 'Carlos', 'Sofia', 'Diego', 'Martina', 'Franco', 'Florencia']
+apellidos_cli = ['Garcia', 'Lopez', 'Perez', 'Gonzalez', 'Rodriguez', 'Fernandez', 'Martinez', 'Gomez', 'Diaz', 'Alvarez', 'Romero']
+
+for _ in range(99):
     nombre = random.choice(nombres_cli)
     apellido = random.choice(apellidos_cli)
     dni = str(random.randint(20000000, 45000000))
